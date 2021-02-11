@@ -1,7 +1,23 @@
 import React from "react";
+import Link from "next/link";
+import styles from "./Header.module.css";
+import Button from "components/ui/button";
 
 const Header = () => {
-  return <header>header here</header>;
+  return (
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <Link href="/">
+          <a className={styles.headerTitle}> JobTrack</a>
+        </Link>
+        <div className={styles.headerRight}>
+          <Button href="/login">
+            <a>Log In</a>
+          </Button>
+        </div>
+      </nav>
+    </header>
+  );
 };
 
 export default Header;

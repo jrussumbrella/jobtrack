@@ -1,5 +1,12 @@
-import Layout from "../components/core/layout/Layout";
+import Layout from "components/core/layout";
+import Intro from "components/landing/Intro";
 
-const IndexPage = () => <Layout title="Home">home page</Layout>;
+const IndexPage = () => (
+  <Layout title="Home">
+    <div className="container">
+      <Intro />
+    </div>
+  </Layout>
+);
 
 export default IndexPage;

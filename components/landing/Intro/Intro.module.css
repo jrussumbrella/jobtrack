@@ -1,0 +1,21 @@
+.section {
+  display: flex;
+}
+
+.info {
+  width: 70%;
+  padding-right: 20px;
+}
+
+.illustration {
+  flex: 1;
+}
+
+.heading {
+  font-size: 40px;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.5;
+}
