@@ -9,6 +9,7 @@ interface Props {
   className?: string;
   fullWidth?: boolean;
   icon?: React.ReactElement;
+  onClick?(): void;
 }
 
 const Button: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const Button: React.FC<Props> = ({
   href,
   fullWidth,
   icon,
+  onClick,
 }) => {
   const styleFullWidth = fullWidth ? styles.btnFullWidth : "";
   const buttonStyle = cName(className, styles.button, styleFullWidth);
@@ -32,7 +34,7 @@ const Button: React.FC<Props> = ({
           </a>
         </Link>
       ) : (
-        <button type={type} className={buttonStyle}>
+        <button type={type} className={buttonStyle} onClick={onClick}>
           {icon && <span className={styles.icon}>{icon}</span>}
           {children}
         </button>

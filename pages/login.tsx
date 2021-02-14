@@ -5,8 +5,11 @@ import Image from "next/image";
 import styles from "styles/Login.module.css";
 import GoogleIcon from "components/icons/Google";
 import GithubIcon from "components/icons/Github";
+import { useAuth } from "contexts/auth/AuthContext";
 
 const Login = () => {
+  const { socialLogin } = useAuth();
+
   return (
     <Layout title="Login">
       <div className="container">
@@ -18,6 +21,7 @@ const Login = () => {
                 className={`${styles.button} ${styles.btnGoogle}`}
                 fullWidth
                 icon={<GoogleIcon />}
+                onClick={() => socialLogin("google")}
               >
                 Google
               </Button>

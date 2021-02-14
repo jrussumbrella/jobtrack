@@ -448,6 +448,11 @@
   "resolved" "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   "version" "1.1.0"
 
+"@types/classnames@^2.2.11":
+  "integrity" "sha512-2koNhpWm3DgWRp5tpkiJ8JGc1xTn2q0l+jUNUE7oMKXUf5NpI9AIdC4kbjGNFBdHtcxBD18LAksoudAVhFKCjw=="
+  "resolved" "https://registry.npmjs.org/@types/classnames/-/classnames-2.2.11.tgz"
+  "version" "2.2.11"
+
 "@types/long@^4.0.1":
   "integrity" "sha512-5tXH6Bx/kNGd3MgffdmP4dy2Z+G4eaXw0SE81Tq3BNadtnMR5/ySMzX4SLEzHJzSmPNn4HIdpQsBvXMUykr58w=="
   "resolved" "https://registry.npmjs.org/@types/long/-/long-4.0.1.tgz"
@@ -810,7 +815,7 @@
     "inherits" "^2.0.1"
     "safe-buffer" "^5.0.1"
 
-"classnames@2.2.6":
+"classnames@^2.2.6", "classnames@2.2.6":
   "integrity" "sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q=="
   "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.2.6.tgz"
   "version" "2.2.6"

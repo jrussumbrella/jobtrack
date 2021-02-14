@@ -1,9 +1,14 @@
+import { AuthProvider } from "contexts/auth/AuthContext";
 import type { AppProps } from "next/app";
 import "normalize.css";
 import "styles/globalStyles.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <AuthProvider>
+      <Component {...pageProps} />
+    </AuthProvider>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for
