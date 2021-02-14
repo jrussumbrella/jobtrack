@@ -6,6 +6,9 @@ import Button from "components/ui/button";
 const Intro = () => {
   return (
     <section className={styles.section}>
+      <div className={styles.illustration}>
+        <Image src="/images/landing_search.svg" width="300" height="300" />
+      </div>
       <div className={styles.info}>
         <h1 className={styles.heading}> Finding a Job ?</h1>
         <p className={styles.description}>
@@ -15,9 +18,6 @@ const Intro = () => {
           ipsam molestiae.
         </p>
         <Button> Get started for free </Button>
-      </div>
-      <div className={styles.illustration}>
-        <Image src="/images/landing_search.svg" width="300" height="300" />
       </div>
     </section>
   );

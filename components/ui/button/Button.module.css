@@ -1,4 +1,7 @@
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--color-primary);
   color: #fff;
   border: 1px solid var(--color-primary);
@@ -10,4 +13,12 @@
 
 .button a {
   color: #fff;
+}
+
+.btnFullWidth {
+  width: 100%;
+}
+
+.icon {
+  padding-right: 10px;
 }

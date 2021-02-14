@@ -1,0 +1,47 @@
+.loginContainer {
+  padding: 20px;
+}
+
+.button {
+  margin-bottom: 20px;
+  height: 45px;
+}
+
+.buttonsContainer {
+  margin-top: 40px;
+}
+
+.btnGoogle {
+  background-color: #fff;
+  color: var(--color-dark);
+  border: 1px solid var(--color-gray);
+}
+
+.btnGithub {
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-dark);
+}
+
+.buttonText {
+  margin-left: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .loginContainer {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .illustration {
+    width: 600px;
+    padding-right: 40px;
+  }
+
+  .illustration img {
+    width: 100%;
+  }
+
+  .loginCreds {
+    flex: 1;
+  }
+}

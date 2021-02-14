@@ -1,21 +1,39 @@
 import Link from "next/link";
 import React from "react";
 import styles from "./Button.module.css";
+import cName from "classnames";
 
 interface Props {
   type?: "submit" | "button";
   href?: string;
+  className?: string;
+  fullWidth?: boolean;
+  icon?: React.ReactElement;
 }
 
-const Button: React.FC<Props> = ({ children, type = "button", href }) => {
+const Button: React.FC<Props> = ({
+  children,
+  className,
+  type = "button",
+  href,
+  fullWidth,
+  icon,
+}) => {
+  const styleFullWidth = fullWidth ? styles.btnFullWidth : "";
+  const buttonStyle = cName(className, styles.button, styleFullWidth);
+
   return (
     <>
       {href ? (
         <Link href={href}>
-          <a className={styles.button}>{children}</a>
+          <a className={buttonStyle}>
+            {icon && <span className={styles.icon}>{icon}</span>}
+            {children}
+          </a>
         </Link>
       ) : (
-        <button type={type} className={styles.button}>
+        <button type={type} className={buttonStyle}>
+          {icon && <span className={styles.icon}>{icon}</span>}
           {children}
         </button>
       )}

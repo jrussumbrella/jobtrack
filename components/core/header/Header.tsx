@@ -12,7 +12,7 @@ const Header = () => {
         </Link>
         <div className={styles.headerRight}>
           <Button href="/login">
-            <a>Log In</a>
+            Log In
           </Button>
         </div>
       </nav>

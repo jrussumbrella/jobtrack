@@ -1,10 +1,5 @@
 .section {
-  display: flex;
-}
-
-.info {
-  width: 70%;
-  padding-right: 20px;
+  padding: 20px;
 }
 
 .illustration {
@@ -18,4 +13,20 @@
 .description {
   font-size: 18px;
   line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+@media only screen and (min-width: 768px) {
+  .section {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .info {
+    width: 60%;
+  }
+
+  .illustration {
+    margin-left: 80px;
+  }
 }
