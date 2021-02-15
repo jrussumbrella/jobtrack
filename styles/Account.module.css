@@ -1,0 +1,37 @@
+.accountContainer {
+  padding: 20px;
+}
+
+.accountDetailsContainer {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.accountInfo {
+  padding: 10px;
+}
+
+.name {
+  margin: 20px 0;
+}
+
+.email {
+  margin: 0;
+}
+
+.accountMainContainer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.logOutContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  margin-bottom: 60px;
+}

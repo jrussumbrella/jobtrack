@@ -22,7 +22,7 @@ const Header = () => {
                   <a>Dashboard</a>
                 </Link>
               </li>
-              <li className={styles.headerList}>
+              <li>
                 <Link href="/account">
                   <a>
                     <Avatar

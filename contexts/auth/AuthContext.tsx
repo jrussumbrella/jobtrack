@@ -65,6 +65,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const logout = async () => {
     await AuthService.logOut();
     dispatch({ type: "LOG_OUT" });
+    Router.push("/login");
   };
 
   return (
