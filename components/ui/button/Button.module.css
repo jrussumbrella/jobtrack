@@ -22,3 +22,8 @@
 .icon {
   padding-right: 10px;
 }
+
+.danger {
+  background-color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+}

@@ -10,6 +10,7 @@ interface Props {
   fullWidth?: boolean;
   icon?: React.ReactElement;
   onClick?(): void;
+  variant?: "primary" | "danger" | "info";
 }
 
 const Button: React.FC<Props> = ({
@@ -19,10 +20,16 @@ const Button: React.FC<Props> = ({
   href,
   fullWidth,
   icon,
+  variant = "primary",
   onClick,
 }) => {
   const styleFullWidth = fullWidth ? styles.btnFullWidth : "";
-  const buttonStyle = cName(className, styles.button, styleFullWidth);
+  const buttonStyle = cName(
+    className,
+    styles.button,
+    styles[variant],
+    styleFullWidth
+  );
 
   return (
     <>

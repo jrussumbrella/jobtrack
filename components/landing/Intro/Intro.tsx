@@ -10,7 +10,9 @@ const Intro = () => {
         <Image src="/images/landing_search.svg" width="300" height="300" />
       </div>
       <div className={styles.info}>
-        <h1 className={styles.heading}> Finding a Job ?</h1>
+        <h1 className={styles.heading}>
+          Having trouble tracking your job applications ?
+        </h1>
         <p className={styles.description}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
           cumque vel rerum laudantium dolorum! A numquam voluptatum quas,

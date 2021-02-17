@@ -2,17 +2,20 @@
 
 :root {
   --color-primary: #0097e6;
-  --color-gray: #edf2f7;
-  --color-gray-dark: #efefef;
+  --color-gray: #b6bec5;
+  --color-gray-dark: #c6b8b8;
   --color-gray-light: #eee;
   --color-dark: #222;
   --color-light: #fff;
-  --color-red: #eb1a0f;
   --color-info: blue;
   --color-success: #8bc34a;
   --color-danger: #c00;
   --color-danger-light: #fbe1e3;
   --border-radius: 6px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {

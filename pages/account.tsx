@@ -30,7 +30,9 @@ const Account = () => {
               <Subscription />
             </div>
             <div className={styles.logOutContainer}>
-              <Button onClick={logout}> Log Out </Button>
+              <Button onClick={logout} variant="danger">
+                Log Out
+              </Button>
             </div>
           </div>
         )}
