@@ -8,5 +8,10 @@
 }
 
 .input {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: var(--color-danger);
+  margin-bottom: 10px;
 }

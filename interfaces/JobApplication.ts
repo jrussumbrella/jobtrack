@@ -3,4 +3,5 @@ export interface JobApplication {
   company: string;
   job_title: string;
   status: string;
+  user_id: string;
 }

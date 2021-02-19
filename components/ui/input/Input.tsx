@@ -1,16 +1,12 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import cName from "classnames";
 import styles from "./Input.module.css";
 
-interface Props {
-  label: string;
-  name: string;
-  id: string;
-  placeholder?: string;
-  value: string;
-  onChange(e: React.ChangeEvent<HTMLInputElement>): void;
-  fullWidth?: boolean;
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
+  label?: string;
+  fullWidth?: boolean;
+  onChange?: (...args: any[]) => any;
 }
 
 const Input: React.FC<Props> = ({
@@ -22,6 +18,8 @@ const Input: React.FC<Props> = ({
   onChange,
   fullWidth,
   className,
+  itemRef,
+  ...rest
 }) => {
   const styleFullWidth = fullWidth ? styles.fullWidth : "";
 
@@ -46,6 +44,7 @@ const Input: React.FC<Props> = ({
         id={id}
         placeholder={placeholder}
         value={value}
+        {...rest}
       />
     </>
   );
