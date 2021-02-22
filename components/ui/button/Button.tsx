@@ -11,7 +11,7 @@ interface Props {
   icon?: React.ReactElement;
   onClick?(): void;
   disabled?: boolean;
-  variant?: "primary" | "danger" | "info";
+  variant?: "primary" | "danger" | "info" | "default";
 }
 
 const Button: React.FC<Props> = ({

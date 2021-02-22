@@ -23,6 +23,11 @@
   padding-right: 10px;
 }
 
+.default {
+  background-color: var(--color-gray);
+  border: 1px solid var(--color-gray);
+}
+
 .danger {
   background-color: var(--color-danger);
   border: 1px solid var(--color-danger);

@@ -42,7 +42,10 @@ const ConfirmDeleteModal: React.FC<Props> = ({ onClose, isVisible }) => {
         <strong> {selectedJobApplication?.company} </strong>?
       </p>
       <div className={styles.buttonsContainer}>
-        <Button onClick={onClose}> Cancel </Button>
+        <Button onClick={onClose} variant="default">
+          {" "}
+          Cancel{" "}
+        </Button>
         <Button onClick={handleDelete} variant="danger" disabled={isDeleting}>
           {isDeleting ? "Deleting..." : "Delete"}
         </Button>

@@ -127,7 +127,9 @@ const JobApplicationManageModal: React.FC<Props> = ({ onClose, isVisible }) => {
           <div className={styles.error}>{formik.errors.status}</div>
         ) : null}
         <div className={styles.buttonsContainer}>
-          <Button onClick={onClose}> Cancel </Button>
+          <Button onClick={onClose} variant="default">
+            Cancel
+          </Button>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Saving..." : "Save"}
           </Button>
