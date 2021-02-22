@@ -4,10 +4,18 @@ import {
   SELECT_JOB_APPLICATION,
   UPDATE_JOB_APPLICATION,
   CLEAR_SELECTED_JOB_APPLICATION,
-} from "./job-application-type";
+  GET_JOB_APPLICATIONS,
+} from "./job-application-types";
 
 const jobApplicationReducer = (state: any, action: any) => {
   switch (action.type) {
+    case GET_JOB_APPLICATIONS: {
+      return {
+        ...state,
+        jobApplications: action.payload.jobApplications,
+        isLoading: false,
+      };
+    }
     case ADD_JOB_APPLICATION: {
       return {
         ...state,

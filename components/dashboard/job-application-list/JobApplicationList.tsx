@@ -27,7 +27,7 @@ const JobApplicationList: React.FC<Props> = ({
             Job Title: <strong>{jobApplication.job_title}</strong>
           </p>
           <p>
-            Status: <strong>{jobApplication.status.toUpperCase()}</strong>
+            Status: <strong>{jobApplication.status?.toUpperCase()}</strong>
           </p>
           <div className={styles.buttonsContainer}>
             <Button

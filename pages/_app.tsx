@@ -1,6 +1,7 @@
 import { AuthProvider } from "contexts/auth/AuthContext";
 import { JobApplicationProvider } from "contexts/job-application/job-application-context";
 import type { AppProps } from "next/app";
+import { Toaster } from "react-hot-toast";
 import "normalize.css";
 import "styles/globalStyles.css";
 
@@ -8,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <JobApplicationProvider>
+        <Toaster />
         <Component {...pageProps} />
       </JobApplicationProvider>
     </AuthProvider>

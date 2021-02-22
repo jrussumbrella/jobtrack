@@ -1,52 +1,87 @@
 import React, { createContext, useReducer, useContext, useMemo } from "react";
-import { JobApplication } from "interfaces/JobApplication";
+import {
+  ManageJobApplication,
+  JobApplication,
+} from "interfaces/JobApplication";
 import reducer from "./job-application-reducer";
-import { jobApplications } from "data/data";
 import {
   ADD_JOB_APPLICATION,
   DELETE_JOB_APPLICATION,
   SELECT_JOB_APPLICATION,
   UPDATE_JOB_APPLICATION,
   CLEAR_SELECTED_JOB_APPLICATION,
-} from "./job-application-type";
+  GET_JOB_APPLICATIONS,
+} from "./job-application-types";
+import { JobApplicationService } from "services/job-application-service";
 
 interface InitialState {
+  isLoading: boolean;
   jobApplications: JobApplication[];
   selectedJobApplication: null | JobApplication;
-  deleteJobApplication(id: string): void;
-  addJobApplication(jobApplication: JobApplication): void;
-  selectJobApplication(jobApplication: JobApplication): void;
-  updateJobApplication(jobApplication: JobApplication): void;
-  clearSelectedJobApplication(): void;
+  getJobApplications(): Promise<void>;
+  deleteJobApplication(id: string): Promise<void>;
+  addJobApplication(jobApplication: ManageJobApplication): Promise<void>;
+  selectJobApplication(jobApplication: JobApplication): Promise<void>;
+  updateJobApplication(jobApplication: JobApplication): Promise<void>;
+  clearSelectedJobApplication(): Promise<void>;
 }
 
 const initialState = {
-  jobApplications: jobApplications,
+  jobApplications: [],
+  isLoading: true,
   selectedJobApplication: null,
 };
 
 const JobApplicationContext = createContext<InitialState>({
   ...initialState,
-  deleteJobApplication: () => {},
-  selectJobApplication: () => {},
-  updateJobApplication: () => {},
-  clearSelectedJobApplication: () => {},
-  addJobApplication: () => {},
+  deleteJobApplication: async () => {},
+  selectJobApplication: async () => {},
+  updateJobApplication: async () => {},
+  clearSelectedJobApplication: async () => {},
+  addJobApplication: async () => {},
+  getJobApplications: async () => {},
 });
 
 export const JobApplicationProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const deleteJobApplication = (id: string) => {
+  const getJobApplications = async () => {
+    try {
+      const results = await JobApplicationService.getJobApplications();
+      dispatch({
+        type: GET_JOB_APPLICATIONS,
+        payload: { jobApplications: results },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteJobApplication = async (id: string) => {
+    await JobApplicationService.deleteJobApplication(id);
     dispatch({ type: DELETE_JOB_APPLICATION, payload: { id } });
   };
 
-  const addJobApplication = (jobApplication: JobApplication) => {
-    dispatch({ type: ADD_JOB_APPLICATION, payload: { jobApplication } });
+  const addJobApplication = async (jobApplication: ManageJobApplication) => {
+    const { id } = await JobApplicationService.addJobApplication(
+      jobApplication
+    );
+    const newJobApplication = {
+      ...jobApplication,
+      id,
+    };
+    dispatch({
+      type: ADD_JOB_APPLICATION,
+      payload: { jobApplication: newJobApplication },
+    });
   };
 
-  const updateJobApplication = (jobApplication: JobApplication) => {
-    dispatch({ type: UPDATE_JOB_APPLICATION, payload: { jobApplication } });
+  const updateJobApplication = async (jobApplication: JobApplication) => {
+    await JobApplicationService.updateJobAppication(jobApplication);
+    dispatch({
+      type: UPDATE_JOB_APPLICATION,
+      payload: { jobApplication },
+    });
   };
 
   const selectJobApplication = (jobApplication: JobApplication) => {
@@ -60,6 +95,7 @@ export const JobApplicationProvider: React.FC = ({ children }) => {
   const value = useMemo(
     () => ({
       ...state,
+      getJobApplications,
       addJobApplication,
       deleteJobApplication,
       selectJobApplication,

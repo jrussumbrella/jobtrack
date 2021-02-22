@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Modal from "components/ui/modal/Modal";
 import Button from "components/ui/button";
@@ -6,8 +6,9 @@ import Input from "components/ui/input/Input";
 import Select from "components/ui/select/Select";
 import { useJobApplication } from "contexts/job-application/job-application-context";
 import { JOB_APPLICATION_STATUSES } from "utils/constants";
-import styles from "./JobApplicationManageModal.module.css";
 import { useFormik } from "formik";
+import toast from "react-hot-toast";
+import styles from "./JobApplicationManageModal.module.css";
 
 interface Props {
   onClose(): void;
@@ -38,24 +39,34 @@ const JobApplicationManageModal: React.FC<Props> = ({ onClose, isVisible }) => {
     addJobApplication,
   } = useJobApplication();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const actionTypeText = selectedJobApplication ? "update" : "create";
+
   const formik = useFormik({
     initialValues,
     validationSchema: JobApplicationManageSchema,
-    onSubmit: (values) => {
-      if (selectedJobApplication) {
-        updateJobApplication({
-          id: selectedJobApplication?.id as string,
-          ...values,
-          user_id: "gagagaga",
-        });
-      } else {
-        addJobApplication({
-          id: Date.now().toString(),
-          ...values,
-          user_id: "gagagaga",
-        });
+    onSubmit: async (values, formik) => {
+      try {
+        setIsSubmitting(true);
+        if (selectedJobApplication) {
+          await updateJobApplication({
+            ...selectedJobApplication,
+            ...values,
+          });
+        } else {
+          await addJobApplication(values);
+          formik.resetForm();
+        }
+        setIsSubmitting(false);
+        onClose();
+        const successMessage = `You've successfully ${actionTypeText}d your job application`;
+        toast.success(successMessage);
+      } catch {
+        setIsSubmitting(false);
+        const errorMessage = `Sorry! We were'nt able to ${actionTypeText} your job application. Please try again later.`;
+        toast.error(errorMessage);
       }
-      onClose();
     },
   });
 
@@ -117,7 +128,9 @@ const JobApplicationManageModal: React.FC<Props> = ({ onClose, isVisible }) => {
         ) : null}
         <div className={styles.buttonsContainer}>
           <Button onClick={onClose}> Cancel </Button>
-          <Button type="submit">Save</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Saving..." : "Save"}
+          </Button>
         </div>
       </form>
     </Modal>
