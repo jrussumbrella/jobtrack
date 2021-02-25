@@ -2,8 +2,13 @@ import React from "react";
 import Image from "next/image";
 import styles from "./Intro.module.css";
 import Button from "components/ui/button";
+import { useAuth } from "contexts/auth/AuthContext";
 
 const Intro = () => {
+  const { currentUser } = useAuth();
+
+  const redirectLink = currentUser ? "/dashboard" : "/login";
+
   return (
     <section className={styles.section}>
       <div className={styles.illustration}>
@@ -14,12 +19,12 @@ const Intro = () => {
           Having trouble tracking your job applications ?
         </h1>
         <p className={styles.description}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-          cumque vel rerum laudantium dolorum! A numquam voluptatum quas,
-          repellat ratione pariatur sequi! A unde rerum, obcaecati sunt animi
-          ipsam molestiae.
+          Keeping track of all your job applications is hard. JobTrack makes
+          this process easy for you.
         </p>
-        <Button> Get started for free </Button>
+        <Button className={styles.button} href={redirectLink}>
+          Get started for free
+        </Button>
       </div>
     </section>
   );

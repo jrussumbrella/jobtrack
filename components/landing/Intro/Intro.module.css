@@ -1,6 +1,5 @@
 .section {
   padding: 20px;
-  margin-bottom: 100px;
 }
 
 .illustration {
@@ -18,6 +17,11 @@
   font-size: 18px;
   line-height: 1.5;
   margin-bottom: 40px;
+}
+
+.button {
+  padding: 15px;
+  font-size: 18px;
 }
 
 @media only screen and (min-width: 1024px) {

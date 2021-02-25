@@ -6,7 +6,7 @@ const offers = [
   {
     title: "Easy to use",
     description:
-      "This tool will help you to make your job application easy to manage.",
+      "This tool will help you to make your job application easy to manage. We provide an easy to use dashboard for you.",
     image: "/images/offer_image_1.svg",
   },
   {
