@@ -12,9 +12,10 @@
 }
 
 .headerTitle {
-  font-size: 22px;
+  font-size: 17px;
   color: var(--color-primary);
   font-weight: 600;
+  display: none;
 }
 
 .headerLogo {
@@ -41,4 +42,11 @@
 .headerRight {
   display: flex;
   align-items: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .headerTitle {
+    display: block;
+    font-size: 22px;
+  }
 }
