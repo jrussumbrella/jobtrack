@@ -12,7 +12,14 @@ const Header = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <Link href="/">
-          <a className={styles.headerTitle}> JobTrack</a>
+          <a className={styles.headerLogoContainer}>
+            <img
+              src="/images/logo.svg"
+              className={styles.headerLogo}
+              alt="job track logo"
+            />
+            <span className={styles.headerTitle}>JobTrack</span>
+          </a>
         </Link>
         <ul className={styles.headerRight}>
           {currentUser ? (
