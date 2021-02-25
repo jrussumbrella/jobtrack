@@ -35,3 +35,9 @@
   margin-top: 150px;
   margin-bottom: 60px;
 }
+
+.logoutButton {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-danger);
+}

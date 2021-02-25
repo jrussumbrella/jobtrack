@@ -1,7 +1,7 @@
 import Layout from "components/core/layout";
-import Intro from "components/landing/Intro";
-import Offer from "components/landing/Offer";
-import Pricing from "components/landing/Pricing";
+import Intro from "components/landing/intro";
+import Offer from "components/landing/offer";
+import Pricing from "components/landing/pricing";
 
 const IndexPage = () => (
   <Layout title="Home">

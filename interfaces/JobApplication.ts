@@ -4,6 +4,8 @@ export interface JobApplication {
   job_title: string;
   status: string;
   user_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface ManageJobApplication {
