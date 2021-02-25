@@ -1,5 +1,7 @@
 .footer {
-  height: 90px;
+  margin-top: 50px;
+  border-top: 1px solid var(--color-gray);
+  padding: 20px;
 }
 
 .footer p {

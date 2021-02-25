@@ -3,7 +3,7 @@
 :root {
   --color-primary: #0097e6;
   --color-gray: #b6bec5;
-  --color-gray-dark: #c6b8b8;
+  --color-gray-dark: #8c8989;
   --color-gray-light: #eee;
   --color-dark: #222;
   --color-light: #fff;
@@ -29,6 +29,7 @@ a {
 
 ul {
   list-style: none;
+  padding: 0;
 }
 
 .container {

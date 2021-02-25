@@ -1,5 +1,6 @@
 .section {
   padding: 20px;
+  margin-bottom: 100px;
 }
 
 .illustration {
@@ -10,25 +11,31 @@
 .heading {
   font-size: 30px;
   line-height: 1.5;
+  margin-bottom: 40px;
 }
 
 .description {
   font-size: 18px;
   line-height: 1.5;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 @media only screen and (min-width: 1024px) {
   .section {
     display: flex;
     flex-direction: row-reverse;
+    margin-top: -100px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .info {
     width: 60%;
   }
 
-  .illustration {
-    margin-left: 80px;
+  .info {
+    padding-right: 120px;
   }
 }
