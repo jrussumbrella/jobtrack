@@ -11,8 +11,8 @@ const createUser = async (user: any) => {
     name: displayName,
     email,
     photo_url: photoURL,
-    created_at: timestamp,
-    updated_at: timestamp,
+    created_at: timestamp(),
+    updated_at: timestamp(),
     email_verified: emailVerified,
   };
 

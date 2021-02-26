@@ -17,7 +17,7 @@ const db = firebase.firestore();
 
 const auth = firebase.auth();
 
-const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 const increment = (count: number) => {
   return firebase.firestore.FieldValue.increment(count);

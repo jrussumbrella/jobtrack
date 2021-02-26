@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { AuthProvider } from "contexts/auth/AuthContext";
 import { JobApplicationProvider } from "contexts/job-application/job-application-context";
 import type { AppProps } from "next/app";
@@ -7,12 +8,17 @@ import "styles/globalStyles.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider>
-      <JobApplicationProvider>
-        <Toaster />
-        <Component {...pageProps} />
-      </JobApplicationProvider>
-    </AuthProvider>
+    <>
+      <Head>
+        <link rel="shortcut icon" href="/images/logo.png" />
+      </Head>
+      <AuthProvider>
+        <JobApplicationProvider>
+          <Toaster />
+          <Component {...pageProps} />
+        </JobApplicationProvider>
+      </AuthProvider>
+    </>
   );
 }
 

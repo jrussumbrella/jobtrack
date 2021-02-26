@@ -2,7 +2,7 @@ import {
   JobApplication,
   ManageJobApplication,
 } from "interfaces/JobApplication";
-import { db, auth } from "lib/firebase";
+import { db, auth, timestamp } from "lib/firebase";
 
 const getJobApplications = async (): Promise<JobApplication[]> => {
   const { currentUser } = auth;
@@ -40,9 +40,18 @@ const addJobApplication = async (jobApplication: ManageJobApplication) => {
     job_title,
     user_id: currentUser.uid,
     status,
+    created_at: timestamp(),
+    updated_at: timestamp(),
   };
 
-  return jobApplicationsRef.add(newJobApplication);
+  const { id } = await jobApplicationsRef.add(newJobApplication);
+
+  const getJobApplication = await jobApplicationsRef.doc(id).get();
+
+  return {
+    ...(getJobApplication.data() as JobApplication),
+    id,
+  };
 };
 
 const updateJobAppication = async (jobApplication: JobApplication) => {

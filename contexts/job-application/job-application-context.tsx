@@ -63,16 +63,12 @@ export const JobApplicationProvider: React.FC = ({ children }) => {
   };
 
   const addJobApplication = async (jobApplication: ManageJobApplication) => {
-    const { id } = await JobApplicationService.addJobApplication(
+    const result = await JobApplicationService.addJobApplication(
       jobApplication
     );
-    const newJobApplication = {
-      ...jobApplication,
-      id,
-    };
     dispatch({
       type: ADD_JOB_APPLICATION,
-      payload: { jobApplication: newJobApplication },
+      payload: { jobApplication: result },
     });
   };
 

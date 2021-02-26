@@ -4,6 +4,7 @@ import styles from "./JobApplicationList.module.css";
 import { JobApplication } from "interfaces/JobApplication";
 import { MdEdit } from "react-icons/md";
 import { IoMdTrash } from "react-icons/io";
+import formatDate from "utils/formatDate";
 
 interface Props {
   jobApplications: JobApplication[];
@@ -20,15 +21,35 @@ const JobApplicationList: React.FC<Props> = ({
     <ul className={styles.listContainer}>
       {jobApplications.map((jobApplication) => (
         <li key={jobApplication.id} className={styles.listItem}>
-          <p>
-            Company: <strong>{jobApplication.company}</strong>
-          </p>
-          <p>
-            Job Title: <strong>{jobApplication.job_title}</strong>
-          </p>
-          <p>
-            Status: <strong>{jobApplication.status?.toUpperCase()}</strong>
-          </p>
+          <div className={styles.listInfo}>
+            <p>
+              Company:
+              <strong className={styles.value}>{jobApplication.company}</strong>
+            </p>
+            <p>
+              Job Title:
+              <strong className={styles.value}>
+                {jobApplication.job_title}
+              </strong>
+            </p>
+            <p>
+              Status: <strong>{jobApplication.status.toUpperCase()}</strong>
+            </p>
+            <p>
+              Date Created:
+              <strong className={styles.value}>
+                {jobApplication.updated_at &&
+                  formatDate(jobApplication.created_at)}
+              </strong>
+            </p>
+            <p>
+              Date Updated:
+              <strong className={styles.value}>
+                {jobApplication.updated_at &&
+                  formatDate(jobApplication.updated_at)}
+              </strong>
+            </p>
+          </div>
           <div className={styles.buttonsContainer}>
             <Button
               icon={<MdEdit color="#fff" />}
