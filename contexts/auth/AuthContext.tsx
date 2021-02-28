@@ -5,6 +5,7 @@ import { SocialLoginProvider } from "interfaces/Auth";
 import { User } from "interfaces/User";
 import reducer from "./auth-reducer";
 import Router from "next/router";
+import toast from "react-hot-toast";
 
 interface State {
   isAuthenticated: boolean;
@@ -17,6 +18,7 @@ interface State {
 const defaultValue = {
   isAuthenticated: false,
   isLoading: true,
+  error: null,
   currentUser: null,
 };
 
@@ -55,10 +57,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     try {
       const user = await AuthService.socialLogin(provider);
       setCurrentUser(user);
-      console.log("success");
+      toast.success("Successfully signed in!");
       Router.push("/dashboard");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 

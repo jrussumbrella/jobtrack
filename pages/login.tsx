@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "components/core/layout";
 import Button from "@material-ui/core/Button";
 import Image from "next/image";
@@ -8,7 +8,6 @@ import { useAuth } from "contexts/auth/AuthContext";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "row-reverse",
     },
   },
+  alert: {
+    marginBottom: 20,
+  },
 }));
 
 const Login = () => {
@@ -43,9 +45,9 @@ const Login = () => {
         <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" className={classes.heading}>
-              {" "}
-              Log In With{" "}
+              Log In With
             </Typography>
+
             <div>
               <Button
                 variant="contained"
@@ -63,6 +65,7 @@ const Login = () => {
                 startIcon={<GithubIcon />}
                 variant="contained"
                 size="large"
+                onClick={() => socialLogin("github")}
               >
                 Github
               </Button>
