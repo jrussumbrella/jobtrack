@@ -27,6 +27,7 @@ const Dashboard = () => {
   const {
     isLoading,
     jobApplications,
+    error,
     selectJobApplication,
     clearSelectedJobApplication,
     getJobApplications,
@@ -60,6 +61,21 @@ const Dashboard = () => {
     selectJobApplication(jobApplication);
     handleOpenModal("manageJobApplication");
   };
+
+  if (error) {
+    return (
+      <Layout title="Dashboard">
+        <Container>
+          <div className={classes.messageContainer}>
+            <Alert severity="error">
+              Were'nt able to load your job listings right now. Please try again
+              later.
+            </Alert>
+          </div>
+        </Container>
+      </Layout>
+    );
+  }
 
   return (
     <Layout title="Dashboard">

@@ -7,8 +7,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    backgroundColor: "inherit",
-    color: theme.palette.primary.dark,
+    backgroundColor: theme.palette.background.default,
+    color:
+      theme.palette.type === "light"
+        ? theme.palette.primary.dark
+        : theme.palette.primary.light,
   },
   toolbar: {
     justifyContent: "space-between",

@@ -2,12 +2,11 @@ import { useEffect } from "react";
 import Head from "next/head";
 import { AuthProvider } from "contexts/auth/AuthContext";
 import { JobApplicationProvider } from "contexts/job-application/job-application-context";
+import { ThemeProvider } from "contexts/theme/ThemeContext";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider as MaterialThemeProvider } from "@material-ui/core";
 import "styles/globalStyles.css";
-import { lightTheme } from "theme/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -22,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="shortcut icon" href="/images/logo.png" />
       </Head>
-      <MaterialThemeProvider theme={lightTheme}>
+      <ThemeProvider>
         <CssBaseline />
         <AuthProvider>
           <JobApplicationProvider>
@@ -30,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </JobApplicationProvider>
         </AuthProvider>
-      </MaterialThemeProvider>
+      </ThemeProvider>
     </>
   );
 }

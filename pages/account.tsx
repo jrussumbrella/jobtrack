@@ -8,6 +8,7 @@ import Subscription from "components/account/subscription";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import Settings from "components/account/settings";
 
 const useStyles = makeStyles((theme) => ({
   accountContainer: {
@@ -62,6 +63,7 @@ const Account = () => {
               </div>
             </div>
             <div className={classes.accountMainContainer}>
+              <Settings />
               <Subscription />
             </div>
             <div className={classes.logOutContainer}>

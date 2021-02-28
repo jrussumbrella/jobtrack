@@ -5,6 +5,7 @@ import {
   UPDATE_JOB_APPLICATION,
   CLEAR_SELECTED_JOB_APPLICATION,
   GET_JOB_APPLICATIONS,
+  SET_ERROR,
 } from "./job-application-types";
 
 const jobApplicationReducer = (state: any, action: any) => {
@@ -57,6 +58,12 @@ const jobApplicationReducer = (state: any, action: any) => {
       return {
         ...state,
         selectedJobApplication: null,
+      };
+    }
+    case SET_ERROR: {
+      return {
+        ...state,
+        error: action.payload.error,
       };
     }
     default:

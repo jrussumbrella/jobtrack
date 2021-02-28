@@ -11,11 +11,13 @@ import {
   UPDATE_JOB_APPLICATION,
   CLEAR_SELECTED_JOB_APPLICATION,
   GET_JOB_APPLICATIONS,
+  SET_ERROR,
 } from "./job-application-types";
 import { JobApplicationService } from "services/job-application-service";
 
 interface InitialState {
   isLoading: boolean;
+  error: string | null;
   jobApplications: JobApplication[];
   selectedJobApplication: null | JobApplication;
   getJobApplications(): Promise<void>;
@@ -30,6 +32,7 @@ const initialState = {
   jobApplications: [],
   isLoading: true,
   selectedJobApplication: null,
+  error: null,
 };
 
 const JobApplicationContext = createContext<InitialState>({
@@ -53,7 +56,12 @@ export const JobApplicationProvider: React.FC = ({ children }) => {
         payload: { jobApplications: results },
       });
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: SET_ERROR,
+        payload: {
+          error: error.message,
+        },
+      });
     }
   };
 

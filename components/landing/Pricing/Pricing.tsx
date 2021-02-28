@@ -26,9 +26,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   pricingListContainer: {
-    maxWidth: 700,
-    marginLeft: "auto",
-    marginRight: "auto",
+    [theme.breakpoints.up("md")]: {
+      maxWidth: 700,
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
   },
 }));
 

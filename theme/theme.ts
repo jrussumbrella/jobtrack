@@ -24,7 +24,9 @@ const options = (dark: boolean): ThemeOptions => {
       primary: {
         main: paletteColors.primary,
       },
-      // ...
+      background: {
+        default: paletteColors.background,
+      },
     },
   };
 };

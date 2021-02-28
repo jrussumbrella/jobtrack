@@ -10,8 +10,11 @@ import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    backgroundColor: "inherit",
-    color: theme.palette.primary.dark,
+    backgroundColor: theme.palette.background.default,
+    color:
+      theme.palette.type === "light"
+        ? theme.palette.primary.dark
+        : theme.palette.primary.light,
   },
   toolbar: {
     justifyContent: "space-between",
