@@ -1,51 +1,86 @@
 import React from "react";
 import Link from "next/link";
-import styles from "./Header.module.css";
-import Button from "components/ui/button";
+import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "contexts/auth/AuthContext";
-import Avatar from "components/ui/avatar";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    backgroundColor: "inherit",
+    color: theme.palette.primary.dark,
+  },
+  toolbar: {
+    justifyContent: "space-between",
+  },
+  navRight: {
+    display: "flex",
+    alignItems: "center",
+  },
+  headerLogoContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  headerLogo: {
+    width: "40px",
+    height: "40px",
+    marginRight: "10px",
+  },
+  headerList: {
+    paddingRight: "20px",
+  },
+}));
 
 const Header = () => {
   const { currentUser } = useAuth();
 
+  const classes = useStyles();
+
   return (
-    <header className={styles.header}>
-      <nav className={styles.nav}>
+    <AppBar position="static" className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
         <Link href="/">
-          <a className={styles.headerLogoContainer}>
+          <a className={classes.headerLogoContainer}>
             <img
               src="/images/logo.svg"
-              className={styles.headerLogo}
+              className={classes.headerLogo}
               alt="job track logo"
             />
-            <span className={styles.headerTitle}>JobTrack</span>
+            <Typography variant="h6">JobTrack</Typography>
           </a>
         </Link>
-        <ul className={styles.headerRight}>
+        <div className={classes.navRight}>
           {currentUser ? (
             <>
-              <li className={styles.headerList}>
+              <div className={classes.headerList}>
                 <Link href="/dashboard">
                   <a>Dashboard</a>
                 </Link>
-              </li>
-              <li>
+              </div>
+              <div>
                 <Link href="/account">
                   <a>
                     <Avatar
-                      src={currentUser.photo_url as string}
                       alt={currentUser.name}
+                      src={currentUser.photo_url as string}
                     />
                   </a>
                 </Link>
-              </li>
+              </div>
             </>
           ) : (
-            <Button href="/login">Log In</Button>
+            <Link href="/login" passHref>
+              <Button color="primary" variant="contained">
+                Login
+              </Button>
+            </Link>
           )}
-        </ul>
-      </nav>
-    </header>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 

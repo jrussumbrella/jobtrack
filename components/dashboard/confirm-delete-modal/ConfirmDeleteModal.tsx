@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Modal from "components/ui/modal/Modal";
-import Button from "components/ui/button";
+import Button from "@material-ui/core/Button";
 import { useJobApplication } from "contexts/job-application/job-application-context";
-import styles from "./ConfirmDeleteModal.module.css";
+import { makeStyles } from "@material-ui/core/styles";
 import toast from "react-hot-toast";
 
 interface Props {
@@ -10,7 +10,18 @@ interface Props {
   isVisible: boolean;
 }
 
+const useStyles = makeStyles((theme) => ({
+  buttonsContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  button: {
+    marginRight: 10,
+  },
+}));
+
 const ConfirmDeleteModal: React.FC<Props> = ({ onClose, isVisible }) => {
+  const classes = useStyles();
   const { deleteJobApplication, selectedJobApplication } = useJobApplication();
 
   const [isDeleting, setIsDeleting] = useState(false);
@@ -41,11 +52,21 @@ const ConfirmDeleteModal: React.FC<Props> = ({ onClose, isVisible }) => {
         Are you sure you want to delete this job application
         <strong> {selectedJobApplication?.company} </strong>?
       </p>
-      <div className={styles.buttonsContainer}>
-        <Button onClick={onClose} variant="default">
+      <div className={classes.buttonsContainer}>
+        <Button
+          onClick={onClose}
+          variant="text"
+          className={classes.button}
+          color="default"
+        >
           Cancel
         </Button>
-        <Button onClick={handleDelete} variant="danger" disabled={isDeleting}>
+        <Button
+          onClick={handleDelete}
+          color="secondary"
+          variant="contained"
+          disabled={isDeleting}
+        >
           {isDeleting ? "Deleting..." : "Delete"}
         </Button>
       </div>

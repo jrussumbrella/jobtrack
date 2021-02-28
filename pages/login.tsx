@@ -1,44 +1,78 @@
 import React from "react";
 import Layout from "components/core/layout";
-import Button from "components/ui/button";
+import Button from "@material-ui/core/Button";
 import Image from "next/image";
-import styles from "styles/Login.module.css";
 import GoogleIcon from "components/icons/Google";
 import GithubIcon from "components/icons/Github";
 import { useAuth } from "contexts/auth/AuthContext";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  loginContainer: {
+    margin: "40px auto",
+  },
+  btnGoogle: {
+    marginBottom: 20,
+  },
+  btnGithub: {
+    backgroundColor: "#3d3d3d",
+    color: "#fff ",
+  },
+  heading: {
+    marginBottom: 20,
+  },
+  illustration: {},
+  gridContainer: {
+    [theme.breakpoints.up("md")]: {
+      flexDirection: "row-reverse",
+    },
+  },
+}));
 
 const Login = () => {
+  const classes = useStyles();
   const { socialLogin } = useAuth();
 
   return (
     <Layout title="Login">
-      <div className="container">
-        <div className={styles.loginContainer}>
-          <div className={styles.loginCreds}>
-            <h2> Log In With </h2>
-            <div className={styles.buttonsContainer}>
+      <Container className={classes.loginContainer}>
+        <Grid container spacing={3} className={classes.gridContainer}>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" className={classes.heading}>
+              {" "}
+              Log In With{" "}
+            </Typography>
+            <div>
               <Button
-                className={`${styles.button} ${styles.btnGoogle}`}
+                variant="contained"
+                className={classes.btnGoogle}
                 fullWidth
-                icon={<GoogleIcon />}
+                startIcon={<GoogleIcon />}
                 onClick={() => socialLogin("google")}
+                size="large"
               >
                 Google
               </Button>
               <Button
-                className={`${styles.button} ${styles.btnGithub}`}
+                className={classes.btnGithub}
                 fullWidth
-                icon={<GithubIcon />}
+                startIcon={<GithubIcon />}
+                variant="contained"
+                size="large"
               >
                 Github
               </Button>
             </div>
-          </div>
-          <div className={styles.illustration}>
+          </Grid>
+          <Grid item xs={12} md={6} className={classes.illustration}>
             <Image src="/images/sign_in.svg" width="500" height="500" />
-          </div>
-        </div>
-      </div>
+          </Grid>
+        </Grid>
+      </Container>
     </Layout>
   );
 };

@@ -1,6 +1,32 @@
 import React from "react";
-import styles from "./Offer.module.css";
+import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+
+const useStyles = makeStyles((theme) => ({
+  offerContainer: {
+    marginBottom: 150,
+  },
+  heading: {
+    textAlign: "center",
+    marginBottom: 60,
+    [theme.breakpoints.up("md")]: {
+      fontSize: theme.typography.h4.fontSize,
+    },
+  },
+  offerSection: {},
+  description: {},
+  item: {
+    textAlign: "center",
+  },
+  title: {
+    [theme.breakpoints.up("md")]: {
+      fontSize: theme.typography.h5.fontSize,
+    },
+  },
+}));
 
 const offers = [
   {
@@ -18,21 +44,29 @@ const offers = [
 ];
 
 const Offer = () => {
+  const classes = useStyles();
+
   return (
-    <div className={styles.offerContainer}>
-      <h1 className={styles.heading}>What We Can offer</h1>
-      <div className={styles.offerSection}>
+    <Container className={classes.offerContainer}>
+      <Typography variant="h5" className={classes.heading}>
+        What We Can offer
+      </Typography>
+      <Grid container spacing={10} className={classes.offerSection}>
         {offers.map((offer, key) => {
           return (
-            <div className={styles.item} key={key}>
-              <p className={styles.title}>{offer.title}</p>
+            <Grid item xs={12} md={6} className={classes.item} key={key}>
+              <Typography variant="h6" className={classes.title}>
+                {offer.title}
+              </Typography>
               <Image src={offer.image} width="240" height="240" />
-              <p className={styles.description}>{offer.description}</p>
-            </div>
+              <Typography variant="body1" className={classes.description}>
+                {offer.description}
+              </Typography>
+            </Grid>
           );
         })}
-      </div>
-    </div>
+      </Grid>
+    </Container>
   );
 };
 

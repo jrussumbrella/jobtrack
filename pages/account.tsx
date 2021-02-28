@@ -2,41 +2,78 @@ import Layout from "components/core/layout";
 import React from "react";
 import withAuth from "lib/withAuth";
 import { useAuth } from "contexts/auth/AuthContext";
-import styles from "styles/Account.module.css";
-import Avatar from "components/ui/avatar";
-import Button from "components/ui/button";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
 import Subscription from "components/account/subscription";
+import { makeStyles } from "@material-ui/styles";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+
+const useStyles = makeStyles((theme) => ({
+  accountContainer: {
+    margin: "30px 0",
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+  },
+  accountDetailsContainer: {
+    padding: "10px",
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "30px",
+  },
+  accountInfo: {
+    padding: 10,
+  },
+  accountMainContainer: {
+    maxWidth: 600,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  logOutContainer: {
+    textAlign: "center",
+    marginTop: 100,
+    width: "100%",
+  },
+}));
 
 const Account = () => {
+  const classes = useStyles();
   const { currentUser, logout } = useAuth();
 
   return (
     <Layout title="Account">
-      <div className="container">
-        {currentUser && (
-          <div className={styles.accountContainer}>
-            <div className={styles.accountDetailsContainer}>
+      <Container>
+        {currentUser ? (
+          <div className={classes.accountContainer}>
+            <div className={classes.accountDetailsContainer}>
               <Avatar
                 src={currentUser.photo_url as string}
                 alt={currentUser.name}
-                size={100}
+                className={classes.avatar}
               />
-              <div className={styles.accountInfo}>
-                <h2 className={styles.name}>{currentUser.name}</h2>
-                <p className={styles.email}>{currentUser.email}</p>
+
+              <div className={classes.accountInfo}>
+                <Typography>{currentUser.name}</Typography>
+                <Typography>{currentUser.email}</Typography>
               </div>
             </div>
-            <div className={styles.accountMainContainer}>
+            <div className={classes.accountMainContainer}>
               <Subscription />
             </div>
-            <div className={styles.logOutContainer}>
-              <Button onClick={logout} className={styles.logoutButton}>
+            <div className={classes.logOutContainer}>
+              <Button onClick={logout} variant="text" color="secondary">
                 Log Out
               </Button>
             </div>
           </div>
+        ) : (
+          ""
         )}
-      </div>
+      </Container>
     </Layout>
   );
 };

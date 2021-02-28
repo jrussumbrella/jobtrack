@@ -1,23 +1,36 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import { AuthProvider } from "contexts/auth/AuthContext";
 import { JobApplicationProvider } from "contexts/job-application/job-application-context";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
-import "normalize.css";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider as MaterialThemeProvider } from "@material-ui/core";
 import "styles/globalStyles.css";
+import { lightTheme } from "theme/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement?.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
     <>
       <Head>
         <link rel="shortcut icon" href="/images/logo.png" />
       </Head>
-      <AuthProvider>
-        <JobApplicationProvider>
-          <Toaster />
-          <Component {...pageProps} />
-        </JobApplicationProvider>
-      </AuthProvider>
+      <MaterialThemeProvider theme={lightTheme}>
+        <CssBaseline />
+        <AuthProvider>
+          <JobApplicationProvider>
+            <Toaster />
+            <Component {...pageProps} />
+          </JobApplicationProvider>
+        </AuthProvider>
+      </MaterialThemeProvider>
     </>
   );
 }

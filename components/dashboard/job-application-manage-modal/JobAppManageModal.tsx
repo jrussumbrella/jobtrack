@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Modal from "components/ui/modal/Modal";
-import Button from "components/ui/button";
-import Input from "components/ui/input/Input";
-import Select from "components/ui/select/Select";
+import Button from "@material-ui/core/Button";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import { useJobApplication } from "contexts/job-application/job-application-context";
 import { JOB_APPLICATION_STATUSES } from "utils/constants";
 import { useFormik } from "formik";
@@ -15,16 +20,22 @@ interface Props {
   isVisible: boolean;
 }
 
+const useStyles = makeStyles((theme) => ({
+  input: {
+    marginBottom: 20,
+  },
+  formControl: {
+    marginBottom: 20,
+  },
+}));
+
 const initialValues = {
   job_title: "",
   company: "",
   status: "",
 };
 
-const statuses = [
-  { title: "Please Select", value: "" },
-  ...JOB_APPLICATION_STATUSES,
-];
+const statuses = JOB_APPLICATION_STATUSES;
 
 const JobApplicationManageSchema = Yup.object().shape({
   job_title: Yup.string().required("Job Title is required field"),
@@ -42,6 +53,8 @@ const JobApplicationManageModal: React.FC<Props> = ({ onClose, isVisible }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const actionTypeText = selectedJobApplication ? "update" : "create";
+
+  const classes = useStyles();
 
   const formik = useFormik({
     initialValues,
@@ -89,48 +102,63 @@ const JobApplicationManageModal: React.FC<Props> = ({ onClose, isVisible }) => {
   return (
     <Modal title={modalTitle} onClose={onClose} isVisible={isVisible}>
       <form onSubmit={formik.handleSubmit}>
-        <Input
-          id="company"
+        <TextField
+          id="standard-basic"
           label="Company"
+          autoComplete="true"
+          type="text"
+          className={classes.input}
+          fullWidth
           name="company"
           onChange={formik.handleChange}
+          error={formik.touched.company && Boolean(formik.errors.company)}
+          helperText={formik.touched.company && formik.errors.company}
           value={formik.values.company}
-          fullWidth
-          className={styles.input}
         />
-        {formik.errors.company && formik.touched.company ? (
-          <div className={styles.error}>{formik.errors.company}</div>
-        ) : null}
-        <Input
-          id="job_title"
+        <TextField
+          id="standard-basic"
           label="Job Title"
+          autoComplete="true"
+          type="text"
+          className={classes.input}
+          fullWidth
           name="job_title"
           onChange={formik.handleChange}
+          error={formik.touched.job_title && Boolean(formik.errors.job_title)}
+          helperText={formik.touched.job_title && formik.errors.job_title}
           value={formik.values.job_title}
-          fullWidth
-          className={styles.input}
         />
-        {formik.errors.job_title && formik.touched.job_title ? (
-          <div className={styles.error}>{formik.errors.job_title}</div>
-        ) : null}
-        <Select
-          id="status"
-          label="Status"
-          name="status"
-          onChange={formik.handleChange}
-          value={formik.values.status}
-          fullWidth
-          className={styles.input}
-          options={statuses}
-        />
-        {formik.errors.status && formik.touched.status ? (
-          <div className={styles.error}>{formik.errors.status}</div>
-        ) : null}
+        <FormControl fullWidth className={classes.formControl}>
+          <InputLabel id="status-select-label">Status</InputLabel>
+          <Select
+            labelId="status-select-label"
+            id="status-select-label"
+            value={formik.values.status}
+            onChange={formik.handleChange}
+            fullWidth
+            name="status"
+            error={formik.touched.status && Boolean(formik.errors.status)}
+          >
+            {statuses.map((status) => (
+              <MenuItem key={status.value} value={status.value}>
+                {status.title}
+              </MenuItem>
+            ))}
+          </Select>
+          {formik.touched.status && formik.errors.status && (
+            <FormHelperText error>{formik.errors.status}</FormHelperText>
+          )}
+        </FormControl>
         <div className={styles.buttonsContainer}>
-          <Button onClick={onClose} variant="default">
+          <Button onClick={onClose} variant="text" color="default">
             Cancel
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            variant="contained"
+            color="primary"
+          >
             {isSubmitting ? "Saving..." : "Save"}
           </Button>
         </div>
