@@ -9,7 +9,7 @@ type Props = {
   title?: string;
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   main: {
     minHeight: "calc(90vh)",
   },

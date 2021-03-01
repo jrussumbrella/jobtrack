@@ -10,7 +10,7 @@ const ThemeContext = createContext({
 
 export const ThemeProvider: React.FC = ({ children }) => {
   const { theme } = parseCookies();
-  const initialValue = theme === "light" ? "light" : "dark";
+  const initialValue = theme || "light";
   const [currentTheme, setCurrentTheme] = useState(initialValue);
 
   const selectedTheme = currentTheme === "dark" ? darkTheme : lightTheme;

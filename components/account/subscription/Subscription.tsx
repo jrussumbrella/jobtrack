@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   subscriptionType: {},
   text: { marginBottom: 10 },
 }));

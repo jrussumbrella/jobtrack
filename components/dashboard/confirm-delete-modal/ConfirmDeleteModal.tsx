@@ -10,7 +10,7 @@ interface Props {
   isVisible: boolean;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   buttonsContainer: {
     display: "flex",
     justifyContent: "flex-end",

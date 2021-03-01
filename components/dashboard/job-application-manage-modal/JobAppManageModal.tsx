@@ -13,19 +13,25 @@ import { useJobApplication } from "contexts/job-application/job-application-cont
 import { JOB_APPLICATION_STATUSES } from "utils/constants";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-import styles from "./JobApplicationManageModal.module.css";
 
 interface Props {
   onClose(): void;
   isVisible: boolean;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   input: {
     marginBottom: 20,
   },
   formControl: {
     marginBottom: 20,
+  },
+  buttonsContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  button: {
+    marginRight: 10,
   },
 }));
 
@@ -149,8 +155,13 @@ const JobApplicationManageModal: React.FC<Props> = ({ onClose, isVisible }) => {
             <FormHelperText error>{formik.errors.status}</FormHelperText>
           )}
         </FormControl>
-        <div className={styles.buttonsContainer}>
-          <Button onClick={onClose} variant="text" color="default">
+        <div className={classes.buttonsContainer}>
+          <Button
+            onClick={onClose}
+            className={classes.button}
+            variant="text"
+            color="default"
+          >
             Cancel
           </Button>
           <Button

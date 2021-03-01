@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Settings from "components/account/settings";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   accountContainer: {
     margin: "30px 0",
   },
