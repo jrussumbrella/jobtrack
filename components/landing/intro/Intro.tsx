@@ -56,7 +56,7 @@ const Intro = () => {
         <Grid item xs={12} md={7}>
           <div className={classes.info}>
             <Typography variant="h5" className={classes.heading}>
-              Having trouble tracking your job applications ?
+              Having trouble tracking your job applications?
             </Typography>
             <Typography variant="body2" className={classes.description}>
               Keeping track of all your job applications is hard. JobTrack makes
