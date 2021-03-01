@@ -9,4 +9,9 @@
 
 ## Installation
 
-`git clone https://github.com/jrussumbrella/jobtrack cd jobtrack npm install npm run dev`
+```
+git clone https://github.com/jrussumbrella/jobtrack
+cd jobtrack
+npm install
+npm run dev
+```
