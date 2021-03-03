@@ -7,14 +7,24 @@ service cloud.firestore {
 
     match /jobApplications/{jobApplicationId} {
       allow read:  if isAuthenticated() &&  isUserOwner();
-      allow create, update: if isAuthenticated() &&  isUserOwner() && isNow(incomingData().created_at) && isValidateJobApplication();
+      allow create: if (isAuthenticated() && isUserOwner() && isNow(incomingData().created_at) && isValidateJobApplication()) && (isInFreeTier() || isUserPremium());
+      allow update: if isAuthenticated() &&  isUserOwner() && isNow(incomingData().updated_at) && isValidateJobApplication();
       allow delete: if isAuthenticated() &&  isUserOwner();
+    }
+
+
+    function isUserPremium() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.is_premium;
+    }
+
+    function isInFreeTier() {
+       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.job_applications_count < 50;
     }
 
     function isValidateJobApplication() {
       let isValidJobTitle = request.resource.data.job_title.size() > 6;
       let isValidCompany = request.resource.data.company.size() > 1;
-      let isValidStatus = request.resource.data.status == 'interviewed' || request.resource.data.status == 'offered' || request.resource.data.status == 'denied' || request.resource.data.status == 'accepted';
+      let isValidStatus = getResourceData().status == 'interviewed' || getResourceData().status == 'offered' || request.resource.data.status == 'denied' || getResourceData().status == 'accepted';
       return isValidJobTitle && isValidCompany && isValidStatus;
     }
 

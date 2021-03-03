@@ -2,7 +2,24 @@ import {
   JobApplication,
   ManageJobApplication,
 } from "interfaces/JobApplication";
-import { db, auth, timestamp } from "lib/firebase";
+import { db, auth, timestamp, increment } from "lib/firebase";
+import {
+  JOB_APPLICATIONS_COLLECTION,
+  USERS_COLLECTION,
+} from "./service-constants";
+
+const getTotalJobApplications = async () => {
+  const { currentUser } = auth;
+
+  if (!currentUser) {
+    throw new Error("Please sign in first");
+  }
+
+  const usersRef = db.collection(USERS_COLLECTION).doc(currentUser.uid);
+  const getUsersRef = await usersRef.get();
+  const userData = getUsersRef.data();
+  return userData?.job_applications_count || 0;
+};
 
 const getJobApplications = async (): Promise<JobApplication[]> => {
   const { currentUser } = auth;
@@ -12,7 +29,7 @@ const getJobApplications = async (): Promise<JobApplication[]> => {
   }
 
   const jobApplicationsRef = db
-    .collection("jobApplications")
+    .collection(JOB_APPLICATIONS_COLLECTION)
     .where("user_id", "==", currentUser.uid);
   const getJobApplicationsRef = await jobApplicationsRef.get();
   const jobApplications = getJobApplicationsRef.docs.map((jobApplication) => {
@@ -31,7 +48,11 @@ const addJobApplication = async (jobApplication: ManageJobApplication) => {
     throw new Error("Please sign in first");
   }
 
-  const jobApplicationsRef = db.collection("jobApplications");
+  const batch = db.batch();
+
+  const jobApplicationsRef = db.collection(JOB_APPLICATIONS_COLLECTION);
+  const jobApplicationRef = jobApplicationsRef.doc();
+  const usersRef = db.collection(USERS_COLLECTION).doc(currentUser.uid);
 
   const { company, job_title, status } = jobApplication;
 
@@ -44,13 +65,18 @@ const addJobApplication = async (jobApplication: ManageJobApplication) => {
     updated_at: timestamp(),
   };
 
-  const { id } = await jobApplicationsRef.add(newJobApplication);
+  batch.set(jobApplicationRef, newJobApplication);
+  batch.update(usersRef, { job_applications_count: increment(1) });
 
-  const getJobApplication = await jobApplicationsRef.doc(id).get();
+  await batch.commit();
+
+  const getJobApplication = await jobApplicationsRef
+    .doc(jobApplicationRef.id)
+    .get();
 
   return {
     ...(getJobApplication.data() as JobApplication),
-    id,
+    id: jobApplicationRef.id,
   };
 };
 
@@ -61,7 +87,7 @@ const updateJobAppication = async (jobApplication: JobApplication) => {
   }
 
   const jobApplicationRef = db
-    .collection("jobApplications")
+    .collection(JOB_APPLICATIONS_COLLECTION)
     .doc(jobApplication.id);
   const getJobApplication = await jobApplicationRef.get();
 
@@ -69,7 +95,10 @@ const updateJobAppication = async (jobApplication: JobApplication) => {
     throw new Error("Job Application not exists");
   }
 
-  return jobApplicationRef.update(jobApplication);
+  return jobApplicationRef.update({
+    ...jobApplication,
+    updated_at: timestamp(),
+  });
 };
 
 const deleteJobApplication = async (id: string) => {
@@ -78,7 +107,7 @@ const deleteJobApplication = async (id: string) => {
     throw new Error("Please sign in first");
   }
 
-  const jobApplicationRef = db.collection("jobApplications").doc(id);
+  const jobApplicationRef = db.collection(JOB_APPLICATIONS_COLLECTION).doc(id);
 
   return jobApplicationRef.delete();
 };
@@ -87,5 +116,6 @@ export const JobApplicationService = {
   addJobApplication,
   updateJobAppication,
   getJobApplications,
+  getTotalJobApplications,
   deleteJobApplication,
 };

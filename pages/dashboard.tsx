@@ -28,6 +28,7 @@ const Dashboard = () => {
     isLoading,
     jobApplications,
     error,
+    getTotalJobApplications,
     selectJobApplication,
     clearSelectedJobApplication,
     getJobApplications,
@@ -37,6 +38,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getJobApplications();
+    getTotalJobApplications();
   }, []);
 
   const handleCloseModal = () => {
@@ -98,7 +100,7 @@ const Dashboard = () => {
             )}
           </div>
         )}
-
+        jo
         <ConfirmDeleteModal
           isVisible={selectedModal === "deleteJobApplication"}
           onClose={handleCloseModal}

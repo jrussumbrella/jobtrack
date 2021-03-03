@@ -37,7 +37,7 @@ const ConfirmDeleteModal: React.FC<Props> = ({ onClose, isVisible }) => {
     } catch (error) {
       setIsDeleting(false);
       toast.error(
-        "Sorry! We were'nt able to delete your listing. Please try again later."
+        "Sorry! We were'nt able to delete your job application. Please try again later."
       );
     }
   };

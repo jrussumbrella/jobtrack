@@ -12,14 +12,17 @@ import {
   CLEAR_SELECTED_JOB_APPLICATION,
   GET_JOB_APPLICATIONS,
   SET_ERROR,
+  GET_TOTAL_JOB_APPLICATIONS,
 } from "./job-application-types";
 import { JobApplicationService } from "services/job-application-service";
 
 interface InitialState {
+  totalJobApplications: number;
   isLoading: boolean;
   error: string | null;
   jobApplications: JobApplication[];
   selectedJobApplication: null | JobApplication;
+  getTotalJobApplications(): Promise<void>;
   getJobApplications(): Promise<void>;
   deleteJobApplication(id: string): Promise<void>;
   addJobApplication(jobApplication: ManageJobApplication): Promise<void>;
@@ -29,6 +32,7 @@ interface InitialState {
 }
 
 const initialState = {
+  totalJobApplications: 0,
   jobApplications: [],
   isLoading: true,
   selectedJobApplication: null,
@@ -43,10 +47,16 @@ const JobApplicationContext = createContext<InitialState>({
   clearSelectedJobApplication: async () => {},
   addJobApplication: async () => {},
   getJobApplications: async () => {},
+  getTotalJobApplications: async () => {},
 });
 
 export const JobApplicationProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const getTotalJobApplications = async () => {
+    const result = await JobApplicationService.getTotalJobApplications();
+    dispatch({ type: GET_TOTAL_JOB_APPLICATIONS, payload: { total: result } });
+  };
 
   const getJobApplications = async () => {
     try {
@@ -105,6 +115,7 @@ export const JobApplicationProvider: React.FC = ({ children }) => {
       selectJobApplication,
       updateJobApplication,
       clearSelectedJobApplication,
+      getTotalJobApplications,
     }),
     [state]
   );
