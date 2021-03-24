@@ -5,11 +5,9 @@ import Pricing from "components/landing/pricing";
 
 const IndexPage = () => (
   <Layout title="Home">
-    <div className="container">
-      <Intro />
-      <Offer />
-      <Pricing />
-    </div>
+    <Intro />
+    <Offer />
+    <Pricing />
   </Layout>
 );
 

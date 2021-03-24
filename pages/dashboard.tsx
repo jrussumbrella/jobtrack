@@ -100,7 +100,7 @@ const Dashboard = () => {
             )}
           </div>
         )}
-        jo
+
         <ConfirmDeleteModal
           isVisible={selectedModal === "deleteJobApplication"}
           onClose={handleCloseModal}

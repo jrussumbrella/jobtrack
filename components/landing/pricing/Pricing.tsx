@@ -50,7 +50,7 @@ const Pricing = () => {
         Find a plan that's right for you.
       </Typography>
       <Grid container spacing={5} className={classes.pricingListContainer}>
-        <Grid item xs={12} md={6} data-aos="zoom-in-up">
+        <Grid item xs={12} md={6}>
           <PricingCard
             title="Free"
             description="Limited to up to 50 job applications."

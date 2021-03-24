@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   description: {},
   item: {
     textAlign: "center",
+    padding: "20px",
   },
   title: {
     [theme.breakpoints.up("md")]: {
@@ -51,7 +52,7 @@ const Offer = () => {
       <Typography variant="h5" className={classes.heading}>
         What We Can offer
       </Typography>
-      <Grid container spacing={10} className={classes.offerSection}>
+      <Grid container className={classes.offerSection}>
         {offers.map((offer, key) => {
           return (
             <Grid item xs={12} md={6} className={classes.item} key={key}>

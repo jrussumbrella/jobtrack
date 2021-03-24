@@ -14,6 +14,8 @@ const createUser = async (user: any) => {
     created_at: timestamp(),
     updated_at: timestamp(),
     email_verified: emailVerified,
+    job_applications_count: 0,
+    is_premium: false,
   };
 
   await db.collection(USERS_COLLECTION).doc(uid).set(newUser);
